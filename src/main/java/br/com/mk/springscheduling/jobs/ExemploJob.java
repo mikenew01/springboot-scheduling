@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * @@Scheduled deve ser anotado em qualquer metodo dentro de uma classe configurada com @Component, além de ser
  * necessária a anotação @EnabledScheduling na application.
  */
-@Service
+//@Service
 public class ExemploJob {
 
     private static final Logger log = LoggerFactory.getLogger(ExemploJob.class);
