@@ -7,13 +7,16 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+/**
+ * @@Scheduled deve ser anotado em qualquer metodo dentro de uma classe configurada com @Component, além de ser
+ * necessária a anotação @EnabledScheduling na application.
+ */
 @Service
 public class ExemploJob {
 
     private static final Logger log = LoggerFactory.getLogger(ExemploJob.class);
 
-    /*
-        @Scheduled deve ser anotado em métodos dentro de qualquer classe anotada com @Component.
+    /**
         @Scheduled(fixedRate = 5000): Especifica um intervalo entre as invocações a partir do inicio de cada invocação.
      */
     @Scheduled(fixedRate = 5000)
@@ -21,7 +24,7 @@ public class ExemploJob {
         log.info("Executando task 1 - " + LocalDateTime.now());
     }
 
-    /*
+    /**
         @Scheduled(fixedDelay = 5000): Especifica um intervalo entre as invocações a partir da conclusão da tarefa
         anterior.
      */
@@ -30,7 +33,7 @@ public class ExemploJob {
         log.info("Executando task 2 - " + LocalDateTime.now());
     }
 
-    /*
+    /**
         @Scheduled(initialDelay = 1000, fixedRate = 5000): Especifica um delay inicial antes e executar a tarefa.
      */
     @Scheduled(initialDelay = 1000, fixedRate = 5000)
@@ -38,7 +41,7 @@ public class ExemploJob {
         log.info("Executando task 3 - " + LocalDateTime.now());
     }
 
-    /*
+    /**
         [minutos] [horas] [dias do mês] [mês] [dias da semana] [usuário] [comando]
 
         O preenchimento de cada campo é feito da seguinte maneira:
@@ -51,5 +54,21 @@ public class ExemploJob {
     @Scheduled(cron = "*/10 * * * * MON-FRI")
     public void task4() {
         log.info("Executando task 4 - " + LocalDateTime.now());
+    }
+
+    /**
+        @Scheduled(fixedRateString = "${exemplo.job.fixedRate}"): Parametrização dos valores para scheduled fixedRate
+     */
+    @Scheduled(fixedRateString = "${exemplo.job.fixedRate}")
+    public void task5() {
+        log.info("Executando task 5 - " + LocalDateTime.now());
+    }
+
+    /**
+        @Scheduled(fixedDelayString = "${exemplo.job.fixedDelay}"): Parametrização dos valores para scheduled fixedDelay
+     */
+    @Scheduled(fixedDelayString = "${exemplo.job.fixedDelay}")
+    public void task6() {
+        log.info("Executando task 6 - " + LocalDateTime.now());
     }
 }
